@@ -1,0 +1,14 @@
+
+
+| Task                                                                                      | Command                                                                                                                    |
+|-------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Replace English audio with Tamil audio                                                    | `ffmpeg -i input_video.mp4 -i tamil_audio.mp3 -c:v copy -map 0:v:0 -map 1:a:0 -shortest output_video.mp4`                   |
+| Extract audio from a video file without re-encoding                                       | `ffmpeg -i input_video.mp4 -vn -acodec copy output_audio.mp3`                                                              |
+| Extract AAC audio from a video file without re-encoding                                   | `ffmpeg -i Always_Tamil.mp4 -vn -acodec copy tamil_audio.aac`                                                              |
+| Replace original audio with Tamil AAC audio                                               | `ffmpeg -i Always_Tamil.mp4 -i tamil_audio.aac -c:v copy -map 0:v:0 -map 1:a:0 -shortest output_video.mp4`                  |
+| Trim the first 1 minute and 25 seconds from a video file                                  | `ffmpeg -ss 00:01:25 -i input_video.mp4 -c copy output_video.mp4`                                                          |
+| Trim the first 20 seconds from an audio file                                              | `ffmpeg -ss 00:00:20 -i tamil_audio.aac -c copy trimmed_tamil_audio.aac`                                                   |
+| Replace audio in a video file with trimmed Tamil audio                                    | `ffmpeg -i always_first_cut_eng.mp4 -i trimmed_tamil_audio_first_cut.aac -c:v copy -map 0:v:0 -map 1:a:0 -shortest output_video.mp4` |
+| Adjust audio timestamps to align with video                                               | `ffmpeg -i Always_Tamil.mp4 -i tamil_audio.aac -filter_complex "[1:a]asetpts=PTS-STARTPTS[aligned_audio]" -map 0:v:0 -map "[aligned_audio]" -c:v copy -shortest output_video.mp4` |
+
+
